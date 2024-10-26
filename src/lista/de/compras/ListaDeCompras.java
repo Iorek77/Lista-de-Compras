@@ -4,6 +4,21 @@ import java.util.Scanner;
 
 public class ListaDeCompras {
 
+    public static void showarray(compras[] x) {
+        System.out.println("La lista de compras es:");
+        for (int i = 0; i < x.length; i++) {
+            System.out.println(x[i].getNombre() + " " + x[i].getCantidad() + " ($" + +x[i].calcularTotal(+x[i].getCantidad(), +x[i].getPrecio()) + ")");
+        }
+    }
+
+    public static void arraycost(compras[] x) {
+        double total = 0;
+        for (int i = 0; i < x.length; i++) {
+            total = total + x[i].calcularTotal(x[i].getCantidad(), x[i].getPrecio());
+        }
+        System.out.println("El costo total es: $" + total);
+    }
+    
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         compras leche = new compras("Leche", 1, 42);
@@ -29,11 +44,12 @@ public class ListaDeCompras {
                     quantity = input.nextInt();
                     pan.setCantidad(quantity);
                     break;
+                default:
+                    System.out.println("Item incorrecto.");
+                    i--;
             }
         }
-        System.out.println("La lista de compras es:");
-        System.out.println(lista[0].getNombre()+ " " + lista[0].getCantidad() + "(" + lista[0].calcularTotal(lista[0].getCantidad(), lista[0].getPrecio())+")");
-        System.out.println(lista[1].getNombre()+ " " + lista[1].getCantidad() + "(" + lista[1].calcularTotal(lista[1].getCantidad(), lista[1].getPrecio())+")");
-        System.out.println("El costo total es de: " + (lista[0].calcularTotal(lista[0].getCantidad(), lista[0].getPrecio()) + lista[1].calcularTotal(lista[1].getCantidad(), lista[1].getPrecio())));
+        showarray(lista);
+        arraycost(lista);
     }
-}
+  }
